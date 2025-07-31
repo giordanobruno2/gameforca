@@ -1,4 +1,5 @@
 import flet as ft
+import string
 
 
 def main(page: ft.Page):
@@ -31,15 +32,27 @@ def main(page: ft.Page):
         image=ft.DecorationImage(src='images/keyboard.png', repeat=ft.ImageRepeat.NO_REPEAT, fit=ft.ImageFit.FILL),
         padding= ft.padding.only(top=150, left=80, right=80, bottom=50),
         content = ft.Row(
+            wrap=True,
             controls=[
                 ft.Container(
                     height=50,
                     width=50,
-                    border_radius=ft.border_radius.all(5)
-                )
+                    border_radius=ft.border_radius.all(5),
+                    content=ft.Text(
+                        value=letter,
+                        color=ft.Colors.WHITE,
+                        size=30,
+                        text_align=ft.TextAlign.CENTER,
+                        weight=ft.FontWeight.BOLD
+                    ),
+                    gradient=ft.LinearGradient(
+                        begin=ft.alignment.top_center,
+                        end=ft.alignment.bottom_center,
+                        colors=[ft.Colors.AMBER, ft.Colors.DEEP_ORANGE]
+                    )         
+                ) for letter in string.ascii_uppercase
             ]
-        )
-        
+        )        
     )
     
     layout = ft.ResponsiveRow(
